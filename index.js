@@ -49,7 +49,7 @@ function NumberEditor(opt) {
         //setup main element events
         attachEvents(this.element, {
             keydown: events.keydown.bind(this),
-            dblclick: events.dblclick.bind(this, opt),
+            click: events.click.bind(this, opt),
             change: events.change.bind(this, opt),
             blur: events.blur.bind(this, opt)
         })
@@ -117,6 +117,10 @@ NumberEditor.prototype._constrain = function(value) {
 
 NumberEditor.prototype._display = function(value) {
     return value.toFixed(this.decimals)
+}
+
+NumberEditor.prototype._setSelected = function() {
+    this.element.setSelectionRange(0, this.value.toString().length)
 }
 
 Object.defineProperty(NumberEditor.prototype, "editing", {

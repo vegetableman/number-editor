@@ -41,7 +41,6 @@ module.exports.keydown = function(ev) {
 module.exports.touchKeydown = function(ev) {
     var code = ev.which || ev.keyCode
     if (code !== 8 && !numeric(code, this.decimals > 0)) {
-        // console.log("HELLO"
         ev.preventDefault()
         ev.stopPropagation()
     }
@@ -53,7 +52,7 @@ module.exports.dragStart = function(ev) {
     }
 }
 
-module.exports.dblclick = function(opt, ev) {
+module.exports.click = function(opt, ev) {
     if (this.dragEnabled) {
         ev.preventDefault()
         this.startEdit()
@@ -66,7 +65,7 @@ module.exports.change = function(opt, ev) {
     if (this.cursor)
         this.element.style.cursor = 'ew-resize'
     this.element.setAttribute('readonly', 'readonly')
-    this._setValue( this._parse() )
+    this._setValue( ev.target.value )
 }
 
 module.exports.blur = function(opt, ev) {
@@ -97,5 +96,6 @@ module.exports.dragMove = function(opt, ev, offset, delta) {
 
         var newVal = (this.dragStartValue + delta.x * this.dragScale * step)
         this._setValue(newVal)
+        this._setSelected();
     }
 }

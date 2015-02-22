@@ -1,11 +1,4 @@
-var opts = {
-    min: 0,
-    max: 1,
-    step: 0.01,
-    decimals: 2
-}
-
-var spinner = require('../')(opts)
+var spinner = require('../')()
 
 var fs = require('fs')
 var style = fs.readFileSync(__dirname+'/style.css', 'utf8')
